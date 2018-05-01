@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "Javascript development environment",
   "scripts": {
-    "start": "node buildScripts/srcServer.js"
+    "prestart": "babel-node buildScripts/startMessage.js",
+    "start": "npm-run-all --parallel security-check open:src",
+    "open:src": "babel-node buildScripts/srcServer.js",
+    "security-check": "nsp check",
+    "localtunnel": "lt --port 3000 --subdomain maverick",
+    "share": "npm-run-all --parallel open:src localtunnel"
   },
   "author": "Aman Vimal",
   "license": "MIT",
